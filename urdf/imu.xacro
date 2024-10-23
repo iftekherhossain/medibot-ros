@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot name="medibot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="camera_length" value="0.01" />
+    <xacro:property name="camera_width" value="0.1" />
+    <xacro:property name="camera_height" value="0.05" />
+
+    <!--camera link-->
+    <link name="imu_link">
+        <visual>
+            <geometry>
+                <box size="${camera_length} ${camera_width} ${camera_height}"/>
+            </geometry>
+            <material name="blue" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${camera_length} ${camera_width} ${camera_height}"/>
+            </geometry>
+        </collision>
+        <xacro:box_inertia m="0.1" l="${camera_length}" w="${camera_width}" h="${camera_height}"
+                            xyz="0 0 0" rpy="0 1.57 0" />
+    </link> 
+
+    <joint name="base_imu_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="imu_link"/>
+        <origin xyz="${base_length/2-0.1} 0 ${base_height}" rpy="0 1.57 0"/>
+    </joint>
+
+
+    <gazebo reference="imu_link">
+        <sensor type="imu" name="imu_sensor">
+            <!-- ensure the sensor is active (required) -->
+            <always_on>true</always_on>
+            <update_rate>30</update_rate>
+            <plugin name="my_imu_plugin" filename="libgazebo_ros_imu_sensor.so">
+                <ros>
+                <remapping>~/out:=imu</remapping>
+                </ros>
+            </plugin>
+        </sensor>
+    </gazebo>
+</robot>
+    

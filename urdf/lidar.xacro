@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot name="medibot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="camera_length" value="0.01" />
+    <xacro:property name="camera_width" value="0.1" />
+    <xacro:property name="camera_height" value="0.05" />
+
+    <!--camera link-->
+    <link name="lidar_link">
+        <visual>
+            <geometry>
+                <box size="${camera_length} ${camera_width} ${camera_height}"/>
+            </geometry>
+            <material name="blue" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${camera_length} ${camera_width} ${camera_height}"/>
+            </geometry>
+        </collision>
+        <xacro:box_inertia m="0.1" l="${camera_length}" w="${camera_width}" h="${camera_height}"
+                            xyz="0 0 0" rpy="0 1.57 0" />
+    </link> 
+
+    <joint name="head_lidar_joint" type="fixed">
+        <parent link="head_link"/>
+        <child link="lidar_link"/>
+        <origin xyz="0 0 ${head_radius}" rpy="0 0 0"/>
+    </joint>
+
+
+    <gazebo reference="lidar_link">
+        <sensor type="ray" name="lidar_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>  <!-- This enables visualization of the scan in Gazebo -->
+            <update_rate>5</update_rate> <!-- Frequency of the scan -->
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>720</samples>  <!-- Number of scan points (angular resolution) -->
+                        <resolution>1</resolution>
+                        <min_angle>0</min_angle>  <!-- Start scanning from -90 degrees -->
+                        <max_angle>6.28</max_angle>  <!-- End scanning at +90 degrees -->
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.2</min>  <!-- Minimum range of the LiDAR -->
+                    <max>30.0</max>  <!-- Maximum range of the LiDAR -->
+                </range>
+            </ray>
+            <plugin name="turtlebot3_laserscan" filename="libgazebo_ros_ray_sensor.so">
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>lidar_link</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+</robot>
+    

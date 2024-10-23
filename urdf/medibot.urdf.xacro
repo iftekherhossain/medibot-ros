@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot name="medibot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="common_properties.xacro" />
+    <xacro:include filename="upper_base.urdf.xacro" />
+    <xacro:include filename="upper_base_gazebo.xacro" />
+    <xacro:include filename="mobile_base.xacro" />
+    <xacro:include filename="mobile_base_gazebo.xacro" />
+    <xacro:include filename="camera_gazebo.xacro" />
+    <xacro:include filename="lidar.xacro" />
+    <xacro:include filename="imu.xacro" />
+    <joint name="base_upper_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="body_base_link" />
+        <origin xyz="${base_length/10} 0 ${base_height+body_length/2}" rpy="0 0 0"/>
+    </joint>
+</robot>

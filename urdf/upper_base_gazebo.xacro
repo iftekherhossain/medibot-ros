@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <gazebo reference="body_base_link">
+        <material>
+            Gazebo/Red
+        </material>
+    </gazebo>
+
+    <gazebo reference="shoulder_link">
+        <material>
+            Gazebo/Red
+        </material>
+    </gazebo>
+
+    <gazebo reference="head_link">
+        <material>
+            Gazebo/Red
+        </material>
+    </gazebo>
+
+    <gazebo reference="right_hand_link">
+        <material>
+            Gazebo/Red
+        </material>
+    </gazebo>
+
+    <gazebo reference="right_arm_link">
+        <material>
+            Gazebo/Red
+        </material>
+    </gazebo>
+
+    <gazebo reference="left_hand_link">
+        <material>
+            Gazebo/Red
+        </material>
+    </gazebo>
+    
+    <gazebo reference="left_arm_link">
+        <material>
+            Gazebo/Red
+        </material>
+    </gazebo>
+</robot>

@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+
+<robot name="medibot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- <xacro:include filename="common_properties.xacro" /> -->
+    <xacro:property name="body_length" value="0.5" />
+    <xacro:property name="body_radius" value="0.1" />
+    <xacro:property name="shoulder_length" value="0.1" />
+    <xacro:property name="shoulder_width" value="0.6" />
+    <xacro:property name="shoulder_height" value="0.2" />
+    <xacro:property name="hand_height" value="0.4" />
+    <xacro:property name="hand_radius" value="0.05" />
+    <xacro:property name="head_radius" value="0.1" />
+
+    
+    
+    <!-- upper body link -->
+    <link name="body_base_link">
+        <visual>
+            <geometry>
+                <cylinder radius="${body_radius}" length="${body_length}"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="purple" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${body_radius}" length="${body_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </collision>
+        <xacro:cylinder_inertia m="0.5" r="${body_radius}" h="${body_length}" 
+                            xyz="0 0 0" rpy="0 0 0" />
+    </link>
+
+    <!-- shoulder link -->
+    <link name="shoulder_link">
+        <visual>
+            <geometry>
+                <box size="${shoulder_length} ${shoulder_width} ${shoulder_height}"/>
+            </geometry>
+            <origin xyz="0 0.0 0" rpy="0 0 0" />
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${shoulder_length} ${shoulder_width} ${shoulder_height}"/>
+            </geometry>
+            <origin xyz="0 0.0 0" rpy="0 0 0" />
+        </collision>
+        <xacro:box_inertia m="10.0" 
+        l="${shoulder_length}" w="${shoulder_width}" h="${shoulder_height}" 
+        xyz="0 0 0" rpy="0 0 0" />
+    </link>
+
+    <!-- head link -->
+    <link name="head_link">
+        <visual>
+            <geometry>
+                <sphere radius="${head_radius}"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${head_radius}"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </collision>
+        <xacro:sphere_inertia m="0.5" r="${head_radius}" xyz="0 0 0" rpy="0 0 0" />
+    </link>
+
+    <!-- right hand link -->
+    <link name="right_hand_link">
+        <visual>
+            <geometry>
+                <cylinder radius="${hand_radius}" length="${hand_height}"/>
+            </geometry>
+            <origin xyz="0 0 ${hand_height/2}" rpy="0 0 0" />
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${hand_radius}" length="${hand_height}"/>
+            </geometry>
+            <origin xyz="0 0 ${hand_height/2}" rpy="0 0 0" />
+        </collision>
+        <xacro:cylinder_inertia m="0.5" r="${hand_radius}" h="${hand_height}" 
+                            xyz="0 0 0" rpy="0 0 0" />
+    </link>
+
+    <!-- right arm link -->
+    <link name="right_arm_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.5"/>
+            </geometry>
+            <origin xyz="0 0 ${hand_height/2+head_radius/2}" rpy="0 0 0" />
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.5"/>
+            </geometry>
+            <origin xyz="0 0 ${hand_height/2+head_radius/2}" rpy="0 0 0" />
+        </collision>
+        <xacro:cylinder_inertia m="0.5" r="${hand_radius}" h="${hand_height}" 
+                            xyz="0 0 0" rpy="0 0 0" />
+    </link>
+
+    <!-- left hand link -->
+    <link name="left_hand_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="${hand_height}"/>
+            </geometry>
+            <origin xyz="0 0 ${hand_height/2}" rpy="0 0 0" />
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="${hand_height}"/>
+            </geometry>
+            <origin xyz="0 0 ${hand_height/2}" rpy="0 0 0" />
+        </collision>
+        <xacro:cylinder_inertia m="0.5" r="${hand_radius}" h="${hand_height}" 
+                            xyz="0 0 0" rpy="0 0 0" />
+    </link>
+
+    <!-- left arm link -->
+    <link name="left_arm_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.5"/>
+            </geometry>
+            <origin xyz="0 0 ${hand_height/2+head_radius/2}" rpy="0 0 0" />
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.5"/>
+            </geometry>
+            <origin xyz="0 0 ${hand_height/2+head_radius/2}" rpy="0 0 0" />
+        </collision>
+        <xacro:cylinder_inertia m="0.5" r="${hand_radius}" h="${hand_height}" 
+                            xyz="0 0 0" rpy="0 0 0" />
+    </link>
+
+    
+    <joint name="body_shoulder_joint" type="revolute">
+        <parent link="body_base_link"/>
+        <child link="shoulder_link"/>
+        <origin xyz="0 0 ${body_length/2 + shoulder_height/2}" rpy="0 0 0" />
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.57" upper="1.57" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="shoulder_head_joint" type="fixed">
+        <parent link="shoulder_link"/>
+        <child link="head_link"/>
+        <origin xyz="0 0.0 ${shoulder_height/2+0.1}" rpy="0 0 0" />
+    </joint>
+
+    <joint name="right_hand_shoulder_joint" type="revolute">
+        <parent link="shoulder_link"/>
+        <child link="right_hand_link"/>
+        <origin xyz="0 ${shoulder_width/2} ${shoulder_height/2}" rpy="0 0 0" />
+        <axis xyz="0 1 0"/>
+        <limit lower="-1.57" upper="1.57" effort="100.0" velocity="1.0"/>
+    </joint>
+    <joint name="right_hand_arm_joint" type="revolute">
+        <parent link="right_hand_link"/>
+        <child link="right_arm_link"/>
+        <origin xyz="0 0 ${hand_height}" rpy="0 0 0" />
+        <axis xyz="0 1 0"/>
+        <limit lower="-1.57" upper="1.57" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="left_hand_shoulder_joint" type="revolute">
+        <parent link="shoulder_link"/>
+        <child link="left_hand_link"/>
+        <origin xyz="0 ${-shoulder_width/2} ${shoulder_height/2}" rpy="0 0 0" />
+        <axis xyz="0 1 0"/>
+        <limit lower="-1.57" upper="1.57" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="left_hand_arm_joint" type="revolute">
+        <parent link="left_hand_link"/>
+        <child link="left_arm_link"/>
+        <origin xyz="0 0 ${hand_height}" rpy="0 0 0" />
+        <axis xyz="0 1 0"/>
+        <limit lower="-1.57" upper="1.57" effort="100.0" velocity="1.0"/>
+    </joint>
+
+</robot>
