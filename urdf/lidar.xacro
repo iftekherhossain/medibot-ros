@@ -5,7 +5,7 @@
     <xacro:property name="camera_height" value="0.05" />
 
     <!--camera link-->
-    <link name="lidar_link">
+    <link name="base_scan">
         <visual>
             <geometry>
                 <box size="${camera_length} ${camera_width} ${camera_height}"/>
@@ -21,14 +21,14 @@
                             xyz="0 0 0" rpy="0 1.57 0" />
     </link> 
 
-    <joint name="head_lidar_joint" type="fixed">
+    <!-- <joint name="head_lidar_joint" type="fixed">
         <parent link="head_link"/>
         <child link="lidar_link"/>
         <origin xyz="0 0 ${head_radius}" rpy="0 0 0"/>
-    </joint>
+    </joint> -->
 
 
-    <gazebo reference="lidar_link">
+    <gazebo reference="base_scan">
         <sensor type="ray" name="lidar_sensor">
             <pose>0 0 0 0 0 0</pose>
             <visualize>true</visualize>  <!-- This enables visualization of the scan in Gazebo -->
@@ -48,8 +48,12 @@
                 </range>
             </ray>
             <plugin name="turtlebot3_laserscan" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <remapping>/turtlebot3_laserscan/out:=/scan</remapping>
+                </ros>
                 <output_type>sensor_msgs/LaserScan</output_type>
-                <frame_name>lidar_link</frame_name>
+                <frame_name>base_scan</frame_name>
+                <topic>/scan</topic>
             </plugin>
         </sensor>
     </gazebo>

@@ -2,15 +2,15 @@
   <model name='medibot'>
     <link name='base_footprint'>
       <inertial>
-        <pose>0.02459 0 0.218033 0 -0 0</pose>
-        <mass>6.1</mass>
+        <pose>0.087381 0 0.672619 0 -0 0</pose>
+        <mass>16.8</mass>
         <inertia>
-          <ixx>0.250371</ixx>
+          <ixx>2.3238</ixx>
           <ixy>0</ixy>
-          <ixz>0.00520492</ixz>
-          <iyy>0.322545</iyy>
+          <ixz>-0.262295</ixz>
+          <iyy>2.6999</iyy>
           <iyz>0</iyz>
-          <izz>0.108549</izz>
+          <izz>0.481221</izz>
         </inertia>
       </inertial>
       <collision name='base_footprint_fixed_joint_lump__base_link_collision'>
@@ -64,13 +64,77 @@
           </friction>
         </surface>
       </collision>
-      <collision name='base_footprint_fixed_joint_lump__body_base_link_collision_3'>
-        <pose>0.06 0 0.55 0 -0 0</pose>
+      <collision name='base_footprint_fixed_joint_lump__base_scan_collision_3'>
+        <pose>0.06 0 0.325 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.01 0.1 0.05</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__body_base_link_collision_4'>
+        <pose>0.12 0 0.575 0 -0 0</pose>
         <geometry>
           <cylinder>
             <length>0.5</length>
             <radius>0.1</radius>
           </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__shoulder_link_collision_5'>
+        <pose>0.12 0 0.925 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.6 0.2</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__head_link_collision_6'>
+        <pose>0.12 0 1.125 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.1</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__camera_link_collision_7'>
+        <pose>0.22 0 1.125 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.01 0.1 0.05</size>
+          </box>
         </geometry>
         <surface>
           <contact>
@@ -117,8 +181,16 @@
           </box>
         </geometry>
       </visual>
-      <visual name='base_footprint_fixed_joint_lump__body_base_link_visual_3'>
-        <pose>0.06 0 0.55 0 -0 0</pose>
+      <visual name='base_footprint_fixed_joint_lump__base_scan_visual_3'>
+        <pose>0.06 0 0.325 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.01 0.1 0.05</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__body_base_link_visual_4'>
+        <pose>0.12 0 0.575 0 -0 0</pose>
         <geometry>
           <cylinder>
             <length>0.5</length>
@@ -132,115 +204,8 @@
           </script>
         </material>
       </visual>
-      <sensor name='imu_sensor' type='imu'>
-        <always_on>1</always_on>
-        <update_rate>30</update_rate>
-        <plugin name='my_imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
-          <ros>
-            <remapping>~/out:=imu</remapping>
-          </ros>
-        </plugin>
-        <pose>0.2 0 0.3 3.14159 1.57079 3.14159</pose>
-      </sensor>
-    </link>
-    <joint name='body_shoulder_joint' type='revolute'>
-      <pose relative_to='base_footprint'>0.06 0 0.9 0 -0 0</pose>
-      <parent>base_footprint</parent>
-      <child>shoulder_link</child>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>-1.57</lower>
-          <upper>1.57</upper>
-          <effort>100</effort>
-          <velocity>1</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <link name='shoulder_link'>
-      <pose relative_to='body_shoulder_joint'>0 0 0 0 -0 0</pose>
-      <inertial>
-        <pose>0.000935 0 0.014019 0 -0 0</pose>
-        <mass>10.7</mass>
-        <inertia>
-          <ixx>0.0746897</ixx>
-          <ixy>0</ixy>
-          <ixz>-0.00185981</ixz>
-          <iyy>0.34239</iyy>
-          <iyz>0</iyz>
-          <izz>0.33645</izz>
-        </inertia>
-      </inertial>
-      <collision name='shoulder_link_collision'>
-        <pose>0 0 0 0 -0 0</pose>
-        <geometry>
-          <box>
-            <size>0.1 0.6 0.2</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <collision name='shoulder_link_fixed_joint_lump__head_link_collision_1'>
-        <pose>0 0 0.2 0 -0 0</pose>
-        <geometry>
-          <sphere>
-            <radius>0.1</radius>
-          </sphere>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <collision name='shoulder_link_fixed_joint_lump__camera_link_collision_2'>
-        <pose>0.1 0 0.2 0 -0 0</pose>
-        <geometry>
-          <box>
-            <size>0.01 0.1 0.05</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <collision name='shoulder_link_fixed_joint_lump__lidar_link_collision_3'>
-        <pose>0 0 0.3 0 -0 0</pose>
-        <geometry>
-          <box>
-            <size>0.01 0.1 0.05</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='shoulder_link_visual'>
-        <pose>0 0 0 0 -0 0</pose>
+      <visual name='base_footprint_fixed_joint_lump__shoulder_link_visual_5'>
+        <pose>0.12 0 0.925 0 -0 0</pose>
         <geometry>
           <box>
             <size>0.1 0.6 0.2</size>
@@ -253,8 +218,8 @@
           </script>
         </material>
       </visual>
-      <visual name='shoulder_link_fixed_joint_lump__head_link_visual_1'>
-        <pose>0 0 0.2 0 -0 0</pose>
+      <visual name='base_footprint_fixed_joint_lump__head_link_visual_6'>
+        <pose>0.12 0 1.125 0 -0 0</pose>
         <geometry>
           <sphere>
             <radius>0.1</radius>
@@ -267,8 +232,8 @@
           </script>
         </material>
       </visual>
-      <visual name='shoulder_link_fixed_joint_lump__camera_link_visual_2'>
-        <pose>0.1 0 0.2 0 -0 0</pose>
+      <visual name='base_footprint_fixed_joint_lump__camera_link_visual_7'>
+        <pose>0.22 0 1.125 0 -0 0</pose>
         <geometry>
           <box>
             <size>0.01 0.1 0.05</size>
@@ -281,21 +246,15 @@
           </script>
         </material>
       </visual>
-      <visual name='shoulder_link_fixed_joint_lump__lidar_link_visual_3'>
-        <pose>0 0 0.3 0 -0 0</pose>
-        <geometry>
-          <box>
-            <size>0.01 0.1 0.05</size>
-          </box>
-        </geometry>
-      </visual>
-      <sensor name='camera_sensor' type='camera'>
-        <visualize>1</visualize>
-        <update_rate>10</update_rate>
-        <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
-          <frame_name>camera_link</frame_name>
+      <sensor name='imu_sensor' type='imu'>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <plugin name='my_imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+          <ros>
+            <remapping>~/out:=imu</remapping>
+          </ros>
         </plugin>
-        <pose>0.1 0 0.2 0 -0 0</pose>
+        <pose>0.2 0 0.3 3.14159 1.57079 3.14159</pose>
       </sensor>
       <sensor name='lidar_sensor' type='ray'>
         <visualize>1</visualize>
@@ -316,17 +275,26 @@
         </ray>
         <plugin name='turtlebot3_laserscan' filename='libgazebo_ros_ray_sensor.so'>
           <ros>
-            <remapping>~/out:=scan</remapping>
+            <remapping>/turtlebot3_laserscan/out:=/scan</remapping>
           </ros>
           <output_type>sensor_msgs/LaserScan</output_type>
-          <frame_name>lidar_link</frame_name>
+          <frame_name>base_scan</frame_name>
+          <topic>/scan</topic>
         </plugin>
-        <pose>0 0 0.3 0 -0 0</pose>
+        <pose>0.06 0 0.325 0 -0 0</pose>
+      </sensor>
+      <sensor name='camera_sensor' type='camera'>
+        <visualize>1</visualize>
+        <update_rate>10</update_rate>
+        <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
+          <frame_name>camera_link</frame_name>
+        </plugin>
+        <pose>0.22 0 1.125 0 -0 0</pose>
       </sensor>
     </link>
     <joint name='left_hand_shoulder_joint' type='revolute'>
-      <pose relative_to='shoulder_link'>0 -0.3 0.1 0 -0 0</pose>
-      <parent>shoulder_link</parent>
+      <pose relative_to='base_footprint'>0.12 -0.3 1.025 0 -0 0</pose>
+      <parent>base_footprint</parent>
       <child>left_hand_link</child>
       <axis>
         <xyz>0 1 0</xyz>
@@ -455,8 +423,8 @@
       </visual>
     </link>
     <joint name='right_hand_shoulder_joint' type='revolute'>
-      <pose relative_to='shoulder_link'>0 0.3 0.1 0 -0 0</pose>
-      <parent>shoulder_link</parent>
+      <pose relative_to='base_footprint'>0.12 0.3 1.025 0 -0 0</pose>
+      <parent>base_footprint</parent>
       <child>right_hand_link</child>
       <axis>
         <xyz>0 1 0</xyz>
@@ -722,7 +690,7 @@
       <publish_wheel_tf>1</publish_wheel_tf>
       <odometry_topic>odom</odometry_topic>
       <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_link</robot_base_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
     </plugin>
   </model>
 </sdf>

@@ -9,9 +9,14 @@
     <xacro:include filename="camera_gazebo.xacro" />
     <xacro:include filename="lidar.xacro" />
     <xacro:include filename="imu.xacro" />
-    <joint name="base_upper_joint" type="fixed">
+    <joint name="base_lider_joint" type="fixed">
         <parent link="base_link" />
+        <child link="base_scan" />
+        <origin xyz="${base_length/10} 0 ${base_height+camera_height/2}" rpy="0 0 0"/>
+    </joint>
+    <joint name="lider_upper_joint" type="fixed">
+        <parent link="base_scan" />
         <child link="body_base_link" />
-        <origin xyz="${base_length/10} 0 ${base_height+body_length/2}" rpy="0 0 0"/>
+        <origin xyz="${base_length/10} 0 ${base_height+camera_height}" rpy="0 0 0"/>
     </joint>
 </robot>
