@@ -2,15 +2,15 @@
   <model name='medibot'>
     <link name='base_footprint'>
       <inertial>
-        <pose>0.087381 0 0.672619 0 -0 0</pose>
-        <mass>16.8</mass>
+        <pose>0.038676 0 0.264706 0 -0 0</pose>
+        <mass>6.8</mass>
         <inertia>
-          <ixx>2.3238</ixx>
+          <ixx>0.441344</ixx>
           <ixy>0</ixy>
-          <ixz>-0.262295</ixz>
-          <iyy>2.6999</iyy>
+          <ixz>-0.0357074</ixz>
+          <iyy>0.522927</iyy>
           <iyz>0</iyz>
-          <izz>0.481221</izz>
+          <izz>0.125541</izz>
         </inertia>
       </inertial>
       <collision name='base_footprint_fixed_joint_lump__base_link_collision'>
@@ -80,57 +80,17 @@
           </friction>
         </surface>
       </collision>
-      <collision name='base_footprint_fixed_joint_lump__body_base_link_collision_4'>
-        <pose>0.12 0 0.575 0 -0 0</pose>
+      <collision name='base_footprint_fixed_joint_lump__baymax_link_collision_4'>
+        <pose>0.02 0 0.9 0 -0 1.57</pose>
         <geometry>
-          <cylinder>
-            <length>0.5</length>
-            <radius>0.1</radius>
-          </cylinder>
+          <mesh>
+            <scale>0.007 0.007 0.007</scale>
+            <uri>file:///home/nabil/ros2_ws/src/medibot/urdf/Baymax.STL</uri>
+          </mesh>
         </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
       </collision>
-      <collision name='base_footprint_fixed_joint_lump__shoulder_link_collision_5'>
-        <pose>0.12 0 0.925 0 -0 0</pose>
-        <geometry>
-          <box>
-            <size>0.1 0.6 0.2</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <collision name='base_footprint_fixed_joint_lump__head_link_collision_6'>
-        <pose>0.12 0 1.125 0 -0 0</pose>
-        <geometry>
-          <sphere>
-            <radius>0.1</radius>
-          </sphere>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <collision name='base_footprint_fixed_joint_lump__camera_link_collision_7'>
-        <pose>0.22 0 1.125 0 -0 0</pose>
+      <collision name='base_footprint_fixed_joint_lump__camera_link_collision_5'>
+        <pose>0.17 0 1.375 0 -0 0</pose>
         <geometry>
           <box>
             <size>0.01 0.1 0.05</size>
@@ -189,51 +149,17 @@
           </box>
         </geometry>
       </visual>
-      <visual name='base_footprint_fixed_joint_lump__body_base_link_visual_4'>
-        <pose>0.12 0 0.575 0 -0 0</pose>
+      <visual name='base_footprint_fixed_joint_lump__baymax_link_visual_4'>
+        <pose>0.02 0 0.9 0 -0 1.57</pose>
         <geometry>
-          <cylinder>
-            <length>0.5</length>
-            <radius>0.1</radius>
-          </cylinder>
+          <mesh>
+            <scale>0.007 0.007 0.007</scale>
+            <uri>file:///home/nabil/ros2_ws/src/medibot/urdf/Baymax.STL</uri>
+          </mesh>
         </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
       </visual>
-      <visual name='base_footprint_fixed_joint_lump__shoulder_link_visual_5'>
-        <pose>0.12 0 0.925 0 -0 0</pose>
-        <geometry>
-          <box>
-            <size>0.1 0.6 0.2</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <visual name='base_footprint_fixed_joint_lump__head_link_visual_6'>
-        <pose>0.12 0 1.125 0 -0 0</pose>
-        <geometry>
-          <sphere>
-            <radius>0.1</radius>
-          </sphere>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <visual name='base_footprint_fixed_joint_lump__camera_link_visual_7'>
-        <pose>0.22 0 1.125 0 -0 0</pose>
+      <visual name='base_footprint_fixed_joint_lump__camera_link_visual_5'>
+        <pose>0.17 0 1.375 0 -0 0</pose>
         <geometry>
           <box>
             <size>0.01 0.1 0.05</size>
@@ -289,268 +215,8 @@
         <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
           <frame_name>camera_link</frame_name>
         </plugin>
-        <pose>0.22 0 1.125 0 -0 0</pose>
+        <pose>0.17 0 1.375 0 -0 0</pose>
       </sensor>
-    </link>
-    <joint name='left_hand_shoulder_joint' type='revolute'>
-      <pose relative_to='base_footprint'>0.12 -0.3 1.025 0 -0 0</pose>
-      <parent>base_footprint</parent>
-      <child>left_hand_link</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-1.57</lower>
-          <upper>1.57</upper>
-          <effort>100</effort>
-          <velocity>1</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <link name='left_hand_link'>
-      <pose relative_to='left_hand_shoulder_joint'>0 0 0 0 -0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 -0 0</pose>
-        <mass>0.5</mass>
-        <inertia>
-          <ixx>0.00697917</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.00697917</iyy>
-          <iyz>0</iyz>
-          <izz>0.000625</izz>
-        </inertia>
-      </inertial>
-      <collision name='left_hand_link_collision'>
-        <pose>0 0 0.2 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.4</length>
-            <radius>0.05</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='left_hand_link_visual'>
-        <pose>0 0 0.2 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.4</length>
-            <radius>0.05</radius>
-          </cylinder>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-    </link>
-    <joint name='left_hand_arm_joint' type='revolute'>
-      <pose relative_to='left_hand_link'>0 0 0.4 0 -0 0</pose>
-      <parent>left_hand_link</parent>
-      <child>left_arm_link</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-1.57</lower>
-          <upper>1.57</upper>
-          <effort>100</effort>
-          <velocity>1</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <link name='left_arm_link'>
-      <pose relative_to='left_hand_arm_joint'>0 0 0 0 -0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 -0 0</pose>
-        <mass>0.5</mass>
-        <inertia>
-          <ixx>0.00697917</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.00697917</iyy>
-          <iyz>0</iyz>
-          <izz>0.000625</izz>
-        </inertia>
-      </inertial>
-      <collision name='left_arm_link_collision'>
-        <pose>0 0 0.25 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.5</length>
-            <radius>0.05</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='left_arm_link_visual'>
-        <pose>0 0 0.25 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.5</length>
-            <radius>0.05</radius>
-          </cylinder>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-    </link>
-    <joint name='right_hand_shoulder_joint' type='revolute'>
-      <pose relative_to='base_footprint'>0.12 0.3 1.025 0 -0 0</pose>
-      <parent>base_footprint</parent>
-      <child>right_hand_link</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-1.57</lower>
-          <upper>1.57</upper>
-          <effort>100</effort>
-          <velocity>1</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <link name='right_hand_link'>
-      <pose relative_to='right_hand_shoulder_joint'>0 0 0 0 -0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 -0 0</pose>
-        <mass>0.5</mass>
-        <inertia>
-          <ixx>0.00697917</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.00697917</iyy>
-          <iyz>0</iyz>
-          <izz>0.000625</izz>
-        </inertia>
-      </inertial>
-      <collision name='right_hand_link_collision'>
-        <pose>0 0 0.2 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.4</length>
-            <radius>0.05</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='right_hand_link_visual'>
-        <pose>0 0 0.2 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.4</length>
-            <radius>0.05</radius>
-          </cylinder>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-    </link>
-    <joint name='right_hand_arm_joint' type='revolute'>
-      <pose relative_to='right_hand_link'>0 0 0.4 0 -0 0</pose>
-      <parent>right_hand_link</parent>
-      <child>right_arm_link</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-1.57</lower>
-          <upper>1.57</upper>
-          <effort>100</effort>
-          <velocity>1</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-      </axis>
-    </joint>
-    <link name='right_arm_link'>
-      <pose relative_to='right_hand_arm_joint'>0 0 0 0 -0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 -0 0</pose>
-        <mass>0.5</mass>
-        <inertia>
-          <ixx>0.00697917</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.00697917</iyy>
-          <iyz>0</iyz>
-          <izz>0.000625</izz>
-        </inertia>
-      </inertial>
-      <collision name='right_arm_link_collision'>
-        <pose>0 0 0.25 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.5</length>
-            <radius>0.05</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='right_arm_link_visual'>
-        <pose>0 0 0.25 0 -0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.5</length>
-            <radius>0.05</radius>
-          </cylinder>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
     </link>
     <joint name='wheel_left_joint' type='revolute'>
       <pose relative_to='base_footprint'>-0.15 0.225 0.1 0 -0 0</pose>

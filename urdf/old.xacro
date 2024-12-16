@@ -2,35 +2,28 @@
 <robot name="medibot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:include filename="common_properties.xacro" />
-    <!-- <xacro:include filename="upper_base.urdf.xacro" /> -->
-    <!-- <xacro:include filename="upper_base_gazebo.xacro" /> -->
-    <xacro:include filename="baymax.urdf.xacro" />
+    <xacro:include filename="upper_base.urdf.xacro" />
+    <xacro:include filename="upper_base_gazebo.xacro" />
     <xacro:include filename="mobile_base.xacro" />
     <xacro:include filename="mobile_base_gazebo.xacro" />
     <xacro:include filename="camera_gazebo.xacro" />
     <xacro:include filename="lidar.xacro" />
     <xacro:include filename="imu.xacro" />
 
-    
+    <joint name="head_camera_joint" type="fixed">
+        <parent link="head_link"/>
+        <child link="camera_link"/>
+        <origin xyz="${head_radius} 0 0" rpy="0 0 0"/>
+    </joint>
+
     <joint name="base_lider_joint" type="fixed">
         <parent link="base_link" />
         <child link="base_scan" />
         <origin xyz="${base_length/10} 0 ${base_height+camera_height/2}" rpy="0 0 0"/>
     </joint>
-
-    <joint name="baymax_camera_joint" type="fixed">
-        <parent link="baymax_link"/>
-        <child link="camera_link"/>
-        <origin xyz="0.05 0 0.8" rpy="0 0 0"/>
-    </joint>
-    <!-- <joint name="lider_upper_joint" type="fixed">
+    <joint name="lider_upper_joint" type="fixed">
         <parent link="base_scan" />
         <child link="body_base_link" />
-        <origin xyz="${base_length/10} 0 ${base_height+camera_height}" rpy="0 0 0"/>
-    </joint> -->
-    <joint name="lider_baymax_joint" type="fixed">
-        <parent link="base_scan" />
-        <child link="baymax_link" />
         <origin xyz="${base_length/10} 0 ${base_height+camera_height}" rpy="0 0 0"/>
     </joint>
 </robot>

@@ -2,14 +2,14 @@
 
 <robot name="medibot" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <!-- <xacro:include filename="common_properties.xacro" /> -->
-    <xacro:property name="body_length" value="0.5" />
+    <!-- <xacro:property name="body_length" value="0.5" />
     <xacro:property name="body_radius" value="0.1" />
     <xacro:property name="shoulder_length" value="0.1" />
-    <xacro:property name="shoulder_width" value="0.6" />
+    <xacro:property name="shoulder_width" value="0.4" />
     <xacro:property name="shoulder_height" value="0.2" />
-    <xacro:property name="hand_height" value="0.4" />
+    <xacro:property name="hand_height" value="0.2" />
     <xacro:property name="hand_radius" value="0.05" />
-    <xacro:property name="head_radius" value="0.1" />
+    <xacro:property name="head_radius" value="0.1" /> -->
 
     
     
@@ -93,14 +93,14 @@
     <link name="right_arm_link">
         <visual>
             <geometry>
-                <cylinder radius="0.05" length="0.5"/>
+                <cylinder radius="${hand_radius}" length="${hand_height}"/>
             </geometry>
             <origin xyz="0 0 ${hand_height/2+head_radius/2}" rpy="0 0 0" />
             <material name="grey"/>
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="0.05" length="0.5"/>
+                <cylinder radius="${hand_radius}" length="${hand_height}"/>
             </geometry>
             <origin xyz="0 0 ${hand_height/2+head_radius/2}" rpy="0 0 0" />
         </collision>
@@ -131,14 +131,14 @@
     <link name="left_arm_link">
         <visual>
             <geometry>
-                <cylinder radius="0.05" length="0.5"/>
+                <cylinder radius="${hand_radius}" length="${hand_height}"/>
             </geometry>
             <origin xyz="0 0 ${hand_height/2+head_radius/2}" rpy="0 0 0" />
             <material name="grey"/>
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="0.05" length="0.5"/>
+                <cylinder radius="${hand_radius}" length="${hand_height}"/>
             </geometry>
             <origin xyz="0 0 ${hand_height/2+head_radius/2}" rpy="0 0 0" />
         </collision>
